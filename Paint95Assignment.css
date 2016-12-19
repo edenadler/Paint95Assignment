@@ -1,0 +1,67 @@
+body{
+	background-color: grey;
+	position: relative;
+	margin: 0px;
+	width: 100%;
+}
+#menu{
+	position: relative;
+	display: inline-block;
+	background-color: black;
+	height: 500px;
+	width: 200px;
+	float: left;
+}
+#canvas{
+	height: 500px;
+	width: 500px;
+	position: relative;
+	display: inline-block;
+	background-color: white;
+	transform: translateX(50%);
+}
+#colorMenu{
+	height: 100px;
+	width: 100px;
+	background-color: white;
+}
+#colorRed{
+	background-color: red;
+	height: 20px;
+	width: 20px;
+	position: relative;
+	display: inline-block;
+	margin: 5px;
+}
+#colorBlue{
+	background-color: blue;
+	height: 20px;
+	width: 20px;
+	position: relative;
+	display: inline-block;
+	margin: 5px;
+}
+#colorGreen{
+	background-color: green;
+	height: 20px;
+	width: 20px;
+	position: relative;
+	display: inline-block;
+	margin: 5px;
+}
+#colorOrange{
+	background-color: orange;
+	height: 20px;
+	width: 20px;
+	position: relative;
+	display: inline-block;
+	margin: 5px;
+}
+#colorPurple{
+	background-color: purple;
+	height: 20px;
+	width: 20px;
+	position: relative;
+	display: inline-block;
+	margin: 5px;
+}
