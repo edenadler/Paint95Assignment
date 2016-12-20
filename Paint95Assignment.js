@@ -1,7 +1,7 @@
-
 //create drawing studio
 function init(){
-var canvasDiv = document.createElement("CANVAS");
+
+var canvasDiv = document.createElement("DIV");
 document.body.appendChild(canvasDiv);
 canvasDiv.setAttribute("id","canvas");
 
@@ -18,78 +18,76 @@ var colorRedDiv = document.createElement("BUTTON");
 colorRedDiv.setAttribute("id","colorRed");
 colorRedDiv.setAttribute("class","colors");
 colorMenuDiv.appendChild(colorRedDiv);
+document.getElementById("colorRed").style.backgroundColor = "red";
 
 var colorBlueDiv = document.createElement("BUTTON");
 colorBlueDiv.setAttribute("id","colorBlue");
-colorRedDiv.setAttribute("class","colors");
+colorBlueDiv.setAttribute("class","colors");
 colorMenuDiv.appendChild(colorBlueDiv);
+document.getElementById("colorBlue").style.backgroundColor = "blue";
 
 var colorGreenDiv = document.createElement("BUTTON");
 colorGreenDiv.setAttribute("id","colorGreen");
-colorRedDiv.setAttribute("class","colors");
+colorGreenDiv.setAttribute("class","colors");
 colorMenuDiv.appendChild(colorGreenDiv);
+document.getElementById("colorGreen").style.backgroundColor = "green";
 
 var colorOrangeDiv = document.createElement("BUTTON");
 colorOrangeDiv.setAttribute("id","colorOrange");
-colorRedDiv.setAttribute("class","colors");
+colorOrangeDiv.setAttribute("class","colors");
 colorMenuDiv.appendChild(colorOrangeDiv);
+document.getElementById("colorOrange").style.backgroundColor = "orange";
 
 var colorPurpleDiv = document.createElement("BUTTON");
 colorPurpleDiv.setAttribute("id","colorPurple");
-colorRedDiv.setAttribute("class","colors");
+colorPurpleDiv.setAttribute("class","colors");
 colorMenuDiv.appendChild(colorPurpleDiv);
+document.getElementById("colorPurple").style.backgroundColor = "purple";
 
-var c = document.getElementById("canvas");
-var ctx = c.getContext("2d");
-var pos = { x: 0, y: 0};
+var allColors = document.getElementsByClassName("colors");
+	for (var i = 0; i<allColors.length; i++){
+		allColors[i].addEventListener("click",selectColor);
+	}
+
+document.getElementById("canvas").addEventListener("mousedown", setPosition);
+document.getElementById("canvas").addEventListener("mousemove", draw);
+document.getElementById("canvas").addEventListener("mouseup", finishDrawing);
+
+} //init function close
 var paint = false;
 var colorChoice = "black";
+var pos;
 
 //Choosing the color
 function selectColor(e){
-	colorChoice = e.target.backgroundColor;
+	colorChoice = e.target.style.backgroundColor;
+	paint = true;
 }
 
-function drawColor(e){
-    var colorCanvas = e.target;
-    if (colorChoice == 0){
+function setPosition(e){
+	pos = {x: e.pageX , y: e.pageY};
+}
+
+function draw(e){
+	var canvasSpace = e.target;
+	if (colorChoice == 0){
         alert("please choose a color first!");
         return;
-    }
-}
-
-//DRAWING
-function mouseDown(e){
-	pos.x = e.pageX-this.offsetLeft;
-    pos.y = e.pageY-this.offsetTop;
-    ctx.beginPath();
-    ctx.moveTo(pos.x,pos.y);
-    paint = true;
-}
-
-function mouseMove(e){
-	if (paint){
-		ctx.lineTo(pos.x,pos.y);
-		ctx.strokeStyle = colorChoice;
-		ctx.stroke();
 	}
+	var newPixel = document.createElement("DIV");
+	newPixel.setAttribute("class","pixels");
+	newPixel.setAttribute("id","pixel");
+	newPixel.setAttribute("style","height: 5px; width: 5px; display: block; position: absolute;");
+	newPixel.style.left = pos.x +'px';
+  	newPixel.style.top = pos.y +'px';
+    newPixel.style.backgroundColor = colorChoice;
+	canvasSpace.appendChild(newPixel);
+	pos = {x: e.pageX , y: e.pageY};
+    console.log(pos.x,pos.y);
+    pos.x -= canvasSpace.offsetLeft;
+    pos.y -= canvasSpace.offsetTop;
 }
 
-function mouseUp(e){
+function finishDrawing(){
 	paint = false;
 }
-
-var allColors = document.getElementsByClassName("colors");
-    for (var i = 0; i < allColors.length; i++){
-        allColors[i].addEventListener("click",selectColor);
-    }
-var colorCanvas = document.getElementById("canvas");
-colorCanvas.addEventListener("click",drawColor);
-
-//DRAWING - EVENT LISTENER
-document.getElementById("canvas").addEventListener("mousedown",mouseDown);
-document.getElementById("canvas").addEventListener("mousemove",mouseMove);
-document.getElementById("canvas").addEventListener("mouseup",mouseUp);
-
-} //init function close
-

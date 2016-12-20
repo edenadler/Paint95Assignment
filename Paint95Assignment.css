@@ -26,7 +26,6 @@ body{
 	background-color: white;
 }
 #colorRed{
-	background-color: red;
 	height: 20px;
 	width: 20px;
 	position: relative;
@@ -34,7 +33,6 @@ body{
 	margin: 5px;
 }
 #colorBlue{
-	background-color: blue;
 	height: 20px;
 	width: 20px;
 	position: relative;
@@ -42,7 +40,6 @@ body{
 	margin: 5px;
 }
 #colorGreen{
-	background-color: green;
 	height: 20px;
 	width: 20px;
 	position: relative;
@@ -50,7 +47,6 @@ body{
 	margin: 5px;
 }
 #colorOrange{
-	background-color: orange;
 	height: 20px;
 	width: 20px;
 	position: relative;
@@ -58,7 +54,6 @@ body{
 	margin: 5px;
 }
 #colorPurple{
-	background-color: purple;
 	height: 20px;
 	width: 20px;
 	position: relative;
