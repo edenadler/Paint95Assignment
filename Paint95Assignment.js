@@ -10,54 +10,26 @@ var menuDiv = document.createElement("DIV");
 document.body.appendChild(menuDiv);
 menuDiv.setAttribute("id","menu");
 
-//color menu
-var colorMenuDiv = document.createElement("DIV");
-colorMenuDiv.setAttribute("id", "colorMenu");
-menuDiv.appendChild(colorMenuDiv);
+var buttonArray = ["colorPalatte","drawingUtensil","erasingUtensil","resetEverything"];
+var backgroundImages = [1, 2, 3, 4];
 
-var colorRedDiv = document.createElement("BUTTON");
-colorRedDiv.setAttribute("id","colorRed");
-colorRedDiv.setAttribute("class","colors");
-colorMenuDiv.appendChild(colorRedDiv);
-document.getElementById("colorRed").style.backgroundColor = "red";
+for (var i = 0; i<buttonArray.length; i++){
+	var menuOptions = document.createElement("DIV");
+	menuOptions.setAttribute("id", buttonArray[i]);
+	menuOptions.setAttribute("class","menuChoices");
+	menuDiv.appendChild(menuOptions);
 
-var colorBlueDiv = document.createElement("BUTTON");
-colorBlueDiv.setAttribute("id","colorBlue");
-colorBlueDiv.setAttribute("class","colors");
-colorMenuDiv.appendChild(colorBlueDiv);
-document.getElementById("colorBlue").style.backgroundColor = "blue";
+	document.getElementsByClassName("menuChoices")[i].setAttribute("style","height:50px; width: 50px; position: relative; display: block; margin: 5px; border-radius: 4px; border: 2px solid white; background-color: white;");
+	document.getElementsByClassName("menuChoices")[i].style.backgroundImage = "url('./images/"+backgroundImages[i]+".png')";
+	document.getElementsByClassName("menuChoices")[i].style.backgroundSize = "contain";
+}
 
-var colorGreenDiv = document.createElement("BUTTON");
-colorGreenDiv.setAttribute("id","colorGreen");
-colorGreenDiv.setAttribute("class","colors");
-colorMenuDiv.appendChild(colorGreenDiv);
-document.getElementById("colorGreen").style.backgroundColor = "green";
+var popupToggle = document.createElement("DIV");
+popupToggle.setAttribute("id","popupColor");
+document.getElementById("colorPalatte").appendChild(popupToggle);
 
-var colorOrangeDiv = document.createElement("BUTTON");
-colorOrangeDiv.setAttribute("id","colorOrange");
-colorOrangeDiv.setAttribute("class","colors");
-colorMenuDiv.appendChild(colorOrangeDiv);
-document.getElementById("colorOrange").style.backgroundColor = "orange";
+document.getElementById("colorPalatte").addEventListener("click", changeVisibility);
 
-var colorPurpleDiv = document.createElement("BUTTON");
-colorPurpleDiv.setAttribute("id","colorPurple");
-colorPurpleDiv.setAttribute("class","colors");
-colorMenuDiv.appendChild(colorPurpleDiv);
-document.getElementById("colorPurple").style.backgroundColor = "purple";
-
-var colorYellowDiv = document.createElement("BUTTON");
-colorYellowDiv.setAttribute("id","colorYellow");
-colorYellowDiv.setAttribute("class","colors");
-colorMenuDiv.appendChild(colorYellowDiv);
-document.getElementById("colorYellow").style.backgroundColor = "yellow";
-
-var eraserDiv = document.createElement("BUTTON");
-eraserDiv.setAttribute("id","eraser");
-menuDiv.appendChild(eraserDiv);
-
-var resetDiv = document.createElement("BUTTON");
-resetDiv.setAttribute("id","reset");
-menuDiv.appendChild(resetDiv);
 
 var allColors = document.getElementsByClassName("colors");
 	for (var i = 0; i<allColors.length; i++){
@@ -67,33 +39,44 @@ var allColors = document.getElementsByClassName("colors");
 //making event listener for each pixel in the canvas
 	var mainCanvas = document.getElementById("canvas");
 	var j = 0;
-	for (var i = 0; i<500; i++){
+	for (var i = 0; i<100; i++){
 		j = 0;
-		while (j<500) {
+		while (j<100) {
 			var pixel = document.createElement("DIV");
 			mainCanvas.appendChild(pixel);
 			pixel.setAttribute("class","pixels");
-			pixel.style.height = "10px";
-			pixel.style.width = "10px";
+			pixel.style.height = "5px";
+			pixel.style.width = "5px";
 			pixel.style.display = "inline-block";
 			pixel.style.position = "absolute";
-			pixel.style.top = i + "px";
-			pixel.style.left = j + "px";
+			pixel.style.top = i*5 + "px";
+			pixel.style.left = j*5 + "px";
 			j++;
 		}
 	}
 	var allPixels = document.getElementsByClassName("pixels");
 	for (var i = 0; i<allPixels.length; i++){
 		allPixels[i].addEventListener("mousedown", setPosition);
-		allPixels[i].addEventListener("mousemove", draw);
+		allPixels[i].addEventListener("mouseover", draw);
 		allPixels[i].addEventListener("mouseup", finishDrawing);
 	}	
 
-	document.getElementById("eraser").addEventListener("click",eraseSpot);
+	document.getElementById("erasingUtensil").addEventListener("click",eraseSpot);
 
-	document.getElementById("reset").addEventListener("click",resetCanvas);
+	document.getElementById("resetEverything").addEventListener("click",resetCanvas);
 
 } //init function close
+
+function changeVisibility(){
+	var popup = document.getElementById("popupColor").style.visibility;
+	if (popup == "visible"){
+		popup = "hidden";
+	}
+	else if (popup == "hidden"){
+		popup = "visible";
+	}
+}
+
 
 var paint = false;
 var erasing = false;
