@@ -45,15 +45,24 @@ colorPurpleDiv.setAttribute("class","colors");
 colorMenuDiv.appendChild(colorPurpleDiv);
 document.getElementById("colorPurple").style.backgroundColor = "purple";
 
+var colorYellowDiv = document.createElement("BUTTON");
+colorYellowDiv.setAttribute("id","colorYellow");
+colorYellowDiv.setAttribute("class","colors");
+colorMenuDiv.appendChild(colorYellowDiv);
+document.getElementById("colorYellow").style.backgroundColor = "yellow";
+
+var eraserDiv = document.createElement("BUTTON");
+eraserDiv.setAttribute("id","eraser");
+menuDiv.appendChild(eraserDiv);
+
+var resetDiv = document.createElement("BUTTON");
+resetDiv.setAttribute("id","reset");
+menuDiv.appendChild(resetDiv);
+
 var allColors = document.getElementsByClassName("colors");
 	for (var i = 0; i<allColors.length; i++){
 		allColors[i].addEventListener("click",selectColor);
 	}
-
-// document.getElementById("canvas").addEventListener("mousedown", setPosition);
-// document.getElementById("canvas").addEventListener("mousemove", draw);
-// document.getElementById("canvas").addEventListener("mouseup", finishDrawing);
-
 
 //making event listener for each pixel in the canvas
 	var mainCanvas = document.getElementById("canvas");
@@ -64,8 +73,8 @@ var allColors = document.getElementsByClassName("colors");
 			var pixel = document.createElement("DIV");
 			mainCanvas.appendChild(pixel);
 			pixel.setAttribute("class","pixels");
-			pixel.style.height = "1px";
-			pixel.style.width = "1px";
+			pixel.style.height = "10px";
+			pixel.style.width = "10px";
 			pixel.style.display = "inline-block";
 			pixel.style.position = "absolute";
 			pixel.style.top = i + "px";
@@ -76,13 +85,18 @@ var allColors = document.getElementsByClassName("colors");
 	var allPixels = document.getElementsByClassName("pixels");
 	for (var i = 0; i<allPixels.length; i++){
 		allPixels[i].addEventListener("mousedown", setPosition);
-		allPixels[i].addEventListener("mouseover", draw);
+		allPixels[i].addEventListener("mousemove", draw);
 		allPixels[i].addEventListener("mouseup", finishDrawing);
 	}	
+
+	document.getElementById("eraser").addEventListener("click",eraseSpot);
+
+	document.getElementById("reset").addEventListener("click",resetCanvas);
 
 } //init function close
 
 var paint = false;
+var erasing = false;
 var colorChoice = "black";
 var mouse = {x: "", y: ""};
 
@@ -90,6 +104,7 @@ var mouse = {x: "", y: ""};
 //Choosing the color
 function selectColor(e){
 	colorChoice = e.target.style.backgroundColor;
+	erasing = false;
 }
 
 function setPosition(e){
@@ -98,16 +113,25 @@ function setPosition(e){
 }
 
 function draw(e){
-	var canvasSpace = e.target;
-	if (colorChoice == 0){
-        alert("please choose a color first!");
-        return;
-	}
  	if (paint){
  		this.style.backgroundColor = colorChoice;
+ 	}
+ 	if (erasing){
+ 		this.style.backgroundColor = "white";
  	}
 }
 
 function finishDrawing(){
 	paint = false;
+}
+
+function eraseSpot(){
+	erasing = true;
+	paint = false;
+}
+
+function resetCanvas(){
+	for (var i = 0; i<document.getElementsByClassName("pixels").length; i++){
+		document.getElementsByClassName("pixels")[i].style.backgroundColor = "white";
+	}
 }

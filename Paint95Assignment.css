@@ -7,7 +7,7 @@ body{
 #menu{
 	position: relative;
 	display: inline-block;
-	background-color: black;
+	background-color: white;
 	height: 500px;
 	width: 200px;
 	float: left;
@@ -21,7 +21,7 @@ body{
 	transform: translateX(50%);
 }
 #colorMenu{
-	height: 100px;
+	height: 60px;
 	width: 100px;
 	background-color: white;
 }
@@ -59,4 +59,31 @@ body{
 	position: relative;
 	display: inline-block;
 	margin: 5px;
+}
+#colorYellow{
+	height: 20px;
+	width: 20px;
+	position: relative;
+	display: inline-block;
+	margin: 5px;
+}
+#eraser{
+	height: 20px;
+	width: 20px;
+	position: relative;
+	display: inline-block;
+	margin: 5px;
+	background-image: url("./images/eraser.png");
+	background-size: contain;
+	background-repeat: none;
+}
+#reset{
+	height: 20px;
+	width: 20px;
+	position: relative;
+	display: inline-block;
+	margin: 5px;
+	background-image: url("./images/reset.png");
+	background-size: contain;
+	background-repeat: none;
 }
