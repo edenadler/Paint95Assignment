@@ -10,7 +10,7 @@ body{
 	position: relative;
 	display: inline-block;
 	background-color: rgba(77, 77, 51,0.85);
-	height: 500px;
+	height: 400px;
 	width: 70px;
 	float: left;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -30,9 +30,8 @@ body{
 	display: inline-block;
 }
 #popupColor{
-	display: block;
-	width: 160px;
-	height: 100px;
+	width: 200px;
+	height: 120px;
 	background-color: white;
 	color: blue;
 	text-align: center;
@@ -49,7 +48,7 @@ body{
 	border-radius: 4px;
 }
 #showColor{
-	width: 60px;
+	width: 130px;
 	height: 30px;
 	margin: 5px;
 	padding: 0px;
@@ -58,7 +57,7 @@ body{
 	position: relative;
 	top: 50%;
 	left: 50%;
-	transform: translate(-58%,12%);
+	transform: translate(-54%,12%);
 	border-radius: 4px;
 	border: 1px solid grey;
 }
