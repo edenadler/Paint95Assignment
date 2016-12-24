@@ -26,7 +26,7 @@ for (var i = 0; i<buttonArray.length; i++){
 
 var popupToggle = document.createElement("DIV");
 popupToggle.setAttribute("id","popupColor");
-document.getElementById("colorPalatte").appendChild(popupToggle);
+menuOptions.appendChild(popupToggle);
 document.getElementById("popupColor").style.display = "none";
 document.getElementById("colorPalatte").addEventListener("click", changeVisibility);
 
@@ -37,6 +37,8 @@ document.getElementById("popupColor").appendChild(colorForm);
 var formLabel = document.createElement("P");
 formLabel.style.marginBottom  = "10px";
 formLabel.style.marginTop = "5px";
+formLabel.style.color = "white";
+formLabel.style.fontFamily = "Tahoma, Geneva, sans-serif";
 colorForm.appendChild(formLabel);
 var node = document.createTextNode("Choose your RGB color:");
 formLabel.appendChild(node);
@@ -57,11 +59,6 @@ document.getElementsByClassName("RGB")[i].addEventListener("click", showBackgrou
 var showRGB = document.createElement("DIV");
 	showRGB.setAttribute("id", "showColor");
 	colorForm.appendChild(showRGB);
-
-var allColors = document.getElementsByClassName("colors");
-	for (var i = 0; i<allColors.length; i++){
-		allColors[i].addEventListener("click",selectColor);
-	}
 
 //making event listener for each pixel in the canvas
 	var mainCanvas = document.getElementById("canvas");
@@ -100,12 +97,6 @@ var erasing = false;
 var colorChoice = "black";
 var mouse = {x: "", y: ""};
 
-
-//Choosing the color
-function selectColor(e){
-	colorChoice = e.target.style.backgroundColor;
-	erasing = false;
-}
 
 function setPosition(e){
 	mouse = {x: e.pageX , y: e.pageY};
@@ -148,7 +139,9 @@ function showBackgroundColor(){
 var popupDiv = document.getElementById("popupColor");
 var show = false;
 
-function changeVisibility(){
+function changeVisibility(e){
+    e.stopPropagation();
+    e.preventDefault();
 	if (show){
 		document.getElementById("popupColor").style.display = "none";
 		show = false;
