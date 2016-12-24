@@ -19,7 +19,7 @@ for (var i = 0; i<buttonArray.length; i++){
 	menuOptions.setAttribute("class","menuChoices");
 	menuDiv.appendChild(menuOptions);
 
-	document.getElementsByClassName("menuChoices")[i].setAttribute("style","height:50px; width: 50px; position: relative; display: block; margin: 5px; border-radius: 4px; border: 2px solid white; background-color: white;");
+	document.getElementsByClassName("menuChoices")[i].setAttribute("style","height:50px; width: 50px; cursor: pointer; position: relative; display: block; margin: 5px; border-radius: 4px; border: 2px solid white; background-color: white;");
 	document.getElementsByClassName("menuChoices")[i].style.backgroundImage = "url('./images/"+backgroundImages[i]+".png')";
 	document.getElementsByClassName("menuChoices")[i].style.backgroundSize = "contain";
 }
@@ -27,9 +27,53 @@ for (var i = 0; i<buttonArray.length; i++){
 var popupToggle = document.createElement("DIV");
 popupToggle.setAttribute("id","popupColor");
 document.getElementById("colorPalatte").appendChild(popupToggle);
+var popupDiv = document.getElementById("popupColor").style.display;
+popupDiv = "none";
+document.getElementById("colorPalatte").onclick = changeVisibility;
 
-document.getElementById("colorPalatte").addEventListener("click", changeVisibility);
 
+function changeVisibility(){
+	if (popupDiv == "none"){
+		popupDiv = "block";
+	}
+	else if (popupDiv == "block"){
+		popupDiv = "none";
+	}
+}
+var colorInput = ["R","G","B"];
+
+var colorForm = document.createElement("FORM");
+document.getElementById("popupColor").appendChild(colorForm);
+var formLabel = document.createElement("LABEL");
+colorForm.appendChild(formLabel);
+var node = document.createTextNode("Choose your RGB color:");
+formLabel.appendChild(node);
+
+for (var i = 0; i<colorInput.length; i++){
+	var inputNum = document.createElement("INPUT");
+	inputNum.setAttribute("id", colorInput[i]);
+	inputNum.setAttribute("type","number");
+	inputNum.setAttribute("min","0");
+	inputNum.setAttribute("max","255");
+	inputNum.setAttribute("class","RGB");
+	colorForm.appendChild(inputNum);
+
+document.getElementsByClassName("RGB")[i].addEventListener("click", showBackgroundColor);
+}
+
+var showRGB = document.createElement("DIV");
+	showRGB.setAttribute("id", "showColor");
+	colorForm.appendChild(showRGB);
+
+// var rgbValue = [0,0,0];
+// for (var i = 0; i<rgbValue.length; i++){
+// 	localStorage.setItem("rInput",JSON.stringify(document.getElementById("R").value));
+// }
+// 	var r = JSON.parse(localStorage.getItem(rgbValue[0]));
+// 	var g = JSON.parse(localStorage.getItem(rgbValue[1]));
+// 	var b = JSON.parse(localStorage.getItem(rgbValue[2]));
+// 	var colorRGB = r,g,b;
+// 	document.getElementById("showColor").style.backgroundColor = "rgb("+colorRGB+")";
 
 var allColors = document.getElementsByClassName("colors");
 	for (var i = 0; i<allColors.length; i++){
@@ -67,16 +111,6 @@ var allColors = document.getElementsByClassName("colors");
 
 } //init function close
 
-function changeVisibility(){
-	var popup = document.getElementById("popupColor").style.visibility;
-	if (popup == "visible"){
-		popup = "hidden";
-	}
-	else if (popup == "hidden"){
-		popup = "visible";
-	}
-}
-
 
 var paint = false;
 var erasing = false;
@@ -106,6 +140,7 @@ function draw(e){
 
 function finishDrawing(){
 	paint = false;
+	erasing = false;
 }
 
 function eraseSpot(){
@@ -117,4 +152,11 @@ function resetCanvas(){
 	for (var i = 0; i<document.getElementsByClassName("pixels").length; i++){
 		document.getElementsByClassName("pixels")[i].style.backgroundColor = "white";
 	}
+}
+function showBackgroundColor(){
+	var r = document.getElementById("R").value;
+	var g = document.getElementById("G").value;
+	var b = document.getElementById("B").value;
+
+	document.getElementById("showColor").style.backgroundColor = "rgb("+r+","+g+","+b+")";
 }
