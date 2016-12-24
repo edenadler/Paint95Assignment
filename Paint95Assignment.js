@@ -10,7 +10,7 @@ var menuDiv = document.createElement("DIV");
 document.body.appendChild(menuDiv);
 menuDiv.setAttribute("id","menu");
 
-var buttonArray = ["colorPalatte","drawingUtensil","erasingUtensil","resetEverything"];
+var buttonArray = ["colorPalatte","erasingUtensil","resetEverything","drawingUtensil"];
 var backgroundImages = [1, 2, 3, 4];
 
 for (var i = 0; i<buttonArray.length; i++){
@@ -96,7 +96,14 @@ var paint = false;
 var erasing = false;
 var colorChoice = "black";
 var mouse = {x: "", y: ""};
+var brushSize = "5px";
 
+
+//Choosing the color
+function selectColor(e){
+	colorChoice = e.target.style.backgroundColor;
+	erasing = false;
+}
 
 function setPosition(e){
 	mouse = {x: e.pageX , y: e.pageY};
@@ -133,6 +140,7 @@ function showBackgroundColor(){
 	var b = document.getElementById("B").value;
 
 	document.getElementById("showColor").style.backgroundColor = "rgb("+r+","+g+","+b+")";
+	document.getElementById("showColor").addEventListener("click", selectColor);
 	colorChoice = "rgb("+r+","+g+","+b+")";
 }
 
