@@ -27,21 +27,9 @@ for (var i = 0; i<buttonArray.length; i++){
 var popupToggle = document.createElement("DIV");
 popupToggle.setAttribute("id","popupColor");
 document.getElementById("colorPalatte").appendChild(popupToggle);
-var popupDiv = document.getElementById("popupColor").style.display;
-var show = false;
+document.getElementById("popupColor").style.display = "none";
 document.getElementById("colorPalatte").addEventListener("click", changeVisibility);
 
-
-function changeVisibility(){
-	if (show == false){
-		popupDiv = "block";
-		show = true;
-	}
-	else if (show = true){
-		popupDiv = "none";
-		show = false;
-	}
-}
 var colorInput = ["R","G","B"];
 
 var colorForm = document.createElement("FORM");
@@ -155,4 +143,18 @@ function showBackgroundColor(){
 
 	document.getElementById("showColor").style.backgroundColor = "rgb("+r+","+g+","+b+")";
 	colorChoice = "rgb("+r+","+g+","+b+")";
+}
+
+var popupDiv = document.getElementById("popupColor");
+var show = false;
+
+function changeVisibility(){
+	if (show){
+		document.getElementById("popupColor").style.display = "none";
+		show = false;
+	}
+	else {
+		document.getElementById("popupColor").style.display = "block";
+		show = true;
+	}
 }
