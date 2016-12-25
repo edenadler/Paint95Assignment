@@ -26,7 +26,7 @@ for (var i = 0; i<buttonArray.length; i++){
 
 var popupToggle = document.createElement("DIV");
 popupToggle.setAttribute("id","popupColor");
-menuOptions.appendChild(popupToggle);
+menuDiv.appendChild(popupToggle);
 document.getElementById("popupColor").style.display = "none";
 document.getElementById("colorPalatte").addEventListener("click", changeVisibility);
 
@@ -87,7 +87,7 @@ var showRGB = document.createElement("DIV");
 
 	document.getElementById("erasingUtensil").addEventListener("click",eraseSpot);
 
-	document.getElementById("resetEverything").addEventListener("click",resetCanvas);
+	document.getElementById("resetEverything").addEventListener("click",rC);
 
 } //init function close
 
@@ -101,7 +101,7 @@ var brushSize = "5px";
 
 //Choosing the color
 function selectColor(e){
-	colorChoice = e.target.style.backgroundColor;
+	colorChoice = document.getElementById("showColor").style.backgroundColor;
 	erasing = false;
 }
 
@@ -129,18 +129,18 @@ function eraseSpot(){
 	paint = false;
 }
 
-function resetCanvas(){
+function rC(e){
 	for (var i = 0; i<document.getElementsByClassName("pixels").length; i++){
 		document.getElementsByClassName("pixels")[i].style.backgroundColor = "white";
 	}
 }
+
 function showBackgroundColor(){
 	var r = document.getElementById("R").value;
 	var g = document.getElementById("G").value;
 	var b = document.getElementById("B").value;
 
 	document.getElementById("showColor").style.backgroundColor = "rgb("+r+","+g+","+b+")";
-	document.getElementById("showColor").addEventListener("click", selectColor);
 	colorChoice = "rgb("+r+","+g+","+b+")";
 }
 
