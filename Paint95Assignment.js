@@ -10,8 +10,8 @@ var menuDiv = document.createElement("DIV");
 document.body.appendChild(menuDiv);
 menuDiv.setAttribute("id","menu");
 
-var buttonArray = ["colorPalatte","erasingUtensil","resetEverything","drawingUtensil"];
-var backgroundImages = [1, 2, 3, 4];
+var buttonArray = ["colorPalatte","erasingUtensil","resetEverything"];
+var backgroundImages = [1, 2, 3];
 
 for (var i = 0; i<buttonArray.length; i++){
 	var menuOptions = document.createElement("DIV");
