@@ -24,6 +24,31 @@ for (var i = 0; i<buttonArray.length; i++){
 	document.getElementsByClassName("menuChoices")[i].style.backgroundSize = "contain";
 }
 
+	//making event listener for each pixel in the canvas
+	var mainCanvas = document.getElementById("canvas");
+	var j = 0;
+	for (var i = 0; i<brushAdjust; i++){
+		j = 0;
+		while (j<brushAdjust) {
+			var pixel = document.createElement("DIV");
+			mainCanvas.appendChild(pixel);
+			pixel.setAttribute("class","pixels");
+			pixel.style.height = brushSize + "px";
+			pixel.style.width = brushSize + "px";
+			pixel.style.display = "inline-block";
+			pixel.style.position = "absolute";
+			pixel.style.top = i*brushSize + "px";
+			pixel.style.left = j*brushSize + "px";
+			j++;
+		}
+	}
+	var allPixels = document.getElementsByClassName("pixels");
+	for (var i = 0; i<allPixels.length; i++){
+		allPixels[i].addEventListener("mousedown", setPosition);
+		allPixels[i].addEventListener("mouseover", draw);
+		allPixels[i].addEventListener("mouseup", finishDrawing);
+	}
+
 
 //COLOR PICKER POP UP
 var popupToggle = document.createElement("DIV");
